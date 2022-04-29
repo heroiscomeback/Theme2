@@ -1,0 +1,35 @@
+<div class="collection-description">
+  
+  {% if section.settings.display_image_cat %}
+    <div class="img_cart">
+      {% if section.settings.img_cat != blank %}
+      <a href="https://www.vxdas.com" ><img src="{{ section.settings.img_cat | img_url :"master"}}" alt="{{ collection.title | split: '|' | first }}" /></a>
+     {% else %}
+        {% capture current %}{% cycle 2%}{% endcapture %}
+        {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+       {% endif %}
+    </div>
+  {% endif %}
+ 
+  {% if collection.description != ''  %}
+    <div class="rte">{% include 'multilang' with  collection.description  %}</div>
+  {% endif %}      
+</div>
+{% schema %}
+  {
+    "name": "Collection Header",
+    "settings": [
+	  {
+        "type": "checkbox",
+        "id": "display_image_cat",
+        "label": "Display Image Category?",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "img_cat",
+        "label": "Image Category"
+      }
+	]
+  }
+{% endschema %}

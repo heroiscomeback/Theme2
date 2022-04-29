@@ -1,0 +1,129 @@
+{% if section.settings.enable_collection %}
+<section class="collections-homepage">
+			<div class="widget-title">
+				{% include 'multilang' with section.settings.title_cls %}
+			</div>
+              <div id="collection-{{section.id}}" class="widget-content row" data-row="{{ section.settings.cls_per }}">
+				{% for block in section.blocks %}
+                
+                {%- assign collection = collections[block.settings.collection] -%}
+                
+				{%- assign collection = collections[block.settings.collection] -%}
+        {% if collection == empty %}
+          {% comment %}add default state for collection block in storefront editor{% endcomment %}
+          {% capture collection_title %}Your collection's name{% endcapture %}
+        {% else %}
+          {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+        {% endif %}
+				
+				{% if collection.image %}
+					{% assign no_collection_image = false %}
+					{%- assign collection_image = collection.image -%}
+				{% elsif collection.products.first and collection.products.first.images != empty %}
+					{%- assign collection_image = collection.products.first.featured_image -%}
+				{% else %}
+					{%- assign collection_image = blank -%}
+				{% endif %}
+				
+					<div class="collection-gird-item col-sm-3" id="cls-{{block.id}}">
+						<div class="collection-image">
+							<a href="{{ collection.url }}" class="collection-link">
+								{% unless collection_image == blank %}							
+									{% if collection.image %}
+                              		   <div class="lazy-images-contain">
+                                            <div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+                                            <div class="lazy-images" style="background-image:url({{collection.image.src | collection_img_url: '800x800'}})"></div>
+                                       </div>
+									{% else %}
+                              		  <div class="lazy-images-contain">
+                                            <div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+                                            <div class="lazy-images" style="background-image:url({{collection.products.first.featured_image| collection_img_url: '800x800'}})"></div>
+                                       </div>
+									{% endif %}		
+								{% else %}
+									{% if collection == empty %}
+										<span class="no-img">220 x 166px</span>
+									{% endif %}
+								{% endunless %}
+							</a>
+						</div>
+						<h3 class="collection-title">
+							<a href="{{ collection.url }}">
+								{% include'multilang' with collection_title %}
+								<i class="fa fa-chevron-right"></i>
+							</a>
+						</h3>
+                      	<div class="collection-des">
+							{% include 'multilang' with block.settings.collection_des %}
+						</div>
+					</div>
+				{% endfor %}
+              </div>
+</section>
+{% endif %}
+{% schema %}
+{
+    "name": "Collection List",
+    "max_blocks": 15,
+    "settings": [
+	  {
+		"type" : "checkbox",
+		"id" : "enable_collection",
+		"label" : "Enable",
+		"default" : true
+      },
+      {
+        "type": "richtext",
+        "id": "title_cls",
+        "label": "Heading"
+      },
+	  {
+		"type" : "select",
+		"id" : "cls_per",
+		"label" : "Collections Per Row",
+		"default" : "5",
+		"options" : [
+			{ "value": "3", "label": "3" },
+            { "value": "4", "label": "4" },
+            { "value": "5", "label": "5" },
+            { "value": "6", "label": "6" }
+		]
+	  }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+          },
+		  {
+			"type" : "richtext",
+			"id" : "collection_des",
+			"label" : "Description"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Collection List",
+        "category": "Collection",
+        "blocks": [
+          {
+            "type": "collection"
+          },
+          {
+            "type": "collection"
+          },
+          {
+            "type": "collection"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

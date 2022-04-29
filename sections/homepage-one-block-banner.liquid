@@ -1,0 +1,48 @@
+{% if section.settings.display_block_img %}
+<section class="banner-one-block">
+  <div class="home-block-content">
+    <a href="{{ section.settings.link_img }}">
+      {% if section.settings.block_img != blank %}
+      <div class="lazy-images-contain">
+        {%- assign img_url = section.settings.block_img | img_url: '1200x' -%}
+        <div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+        <div class="lazy-images" style="background-image:url({{img_url}})">
+        </div>
+      </div>
+      {% else %} 	
+      <span class="no-img">1200 x 120px</span>
+      {% endif %}     
+    </a>
+  </div>
+</section>
+{% endif %}
+{% schema %}
+  {
+    "name": "One Banner Block",
+    "settings": [
+		{
+			"type" : "checkbox",
+			"id" : "display_block_img",
+			"label" : "Enable",
+			"default" : true
+		},
+		{
+			"type" : "image_picker",
+			"id" : "block_img",
+			"label" : "Select Image"
+		},
+		{
+			"type" : "url",
+			"id" : "link_img",
+			"label" : "Image Link"
+		}
+	],
+    "presets": [
+      {
+        "name": "Block One Banner",
+        "category": "Advanced layout"
+      }
+    ]
+  }
+{% endschema %}
+

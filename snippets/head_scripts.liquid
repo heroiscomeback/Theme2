@@ -1,0 +1,34 @@
+{{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
+<script src="{{ 'jquery-cookie.min.js' | asset_url }}"></script>
+<script src="{{ 'selectize.min.js' | asset_url }}"></script>
+<!-- <script src="{{ 'jquery.nicescroll.min.js' | asset_url }}" defer="defer"></script> -->
+
+<script>
+  window.ajax_cart = {{settings.ajax_cart}};
+  window.money_format = "{{shop.money_with_currency_format}}";
+  window.shop_currency = "{{ shop.currency }}";
+  window.show_multiple_currencies = {{settings.enable_multiple_currencies}};
+  window.loading_url = "{{ 'loading.gif' | asset_url}}"; 
+  window.use_color_swatch = {{ settings.use_color_swatch }};
+  window.enable_sidebar_multiple_choice = {{ settings.enable_sidebar_multiple_choice}};
+  window.dropdowncart_type = "{{ settings.dropdowncart_type }}";
+  window.file_url = "{{''|file_url}}";
+  window.asset_url = "{{''|asset_url}}";
+  window.show_sidebar = "{{settings.title_sidebar_mb}}";
+  window.hide_sidebar = "{{settings.hide_sidebar_mb}}";
+
+  window.inventory_text = {
+    in_stock: "{{ 'products.product.in_stock' | t }}",
+    many_in_stock: "{{ 'products.product.many_in_stock' | t }}",
+    out_of_stock: "{{ 'products.product.out_of_stock' | t }}",
+    add_to_cart: "{{ 'products.product.add_to_cart' | t }}",
+    sold_out: "{{ 'products.product.sold_out' | t }}",
+    unavailable: "{{ 'products.product.unavailable' | t }}"
+  };
+          
+  window.multi_lang = {{settings.enable_multilang}};
+</script>
+
+{% if settings.enable_multilang %}
+    {% include 'translator' %}
+{% endif %}

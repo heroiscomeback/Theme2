@@ -1,0 +1,51 @@
+{% if section.settings.display_menu %}
+<section class="horizontal-menu">
+    <div class="container">
+      {% assign block_link = section.settings.menu_link %}
+      {% if linklists[block_link].links.size > 0 %}
+
+        <ul class="nav-bar-filter">
+          <li class="module-heading">{% include 'multilang' with section.settings.title_mn  %}</li>
+          {% for link in linklists[block_link].links %}
+          <li><a href="{{ link.url}}">{% include 'multilang' with link.title %}</a></li>
+          {% endfor %}
+        </ul>
+         <ul class="more-nav dropdown">
+           <li><a href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
+              <ul class="subfilter dropdown-menu" aria-labelledby="dLabel" x-placement="top-start"></ul>
+          </li>
+      	 </ul>
+
+      {% endif %}
+   </div>
+</section>
+{% endif %}
+{% schema %}
+  {
+    "name": "Horizental menu",
+    "settings": [
+	  {
+		"type" : "header",
+		"content" : "Horizental menu"
+	  },
+	  {
+		"type" : "checkbox",
+		"id" : "display_menu",
+		"label" : "Enable",
+		"default" : true
+	  },
+	  {
+		"type" : "text",
+		"id" : "title_mn",
+		"label" : "Title 1",
+		"default" : "eMartica’s Best Selling:"
+	  },
+	  {
+		"type" : "link_list",
+		"id" : "menu_link",
+		"label" : "Select menu"
+	  }
+	  
+	]
+  }
+{% endschema %}

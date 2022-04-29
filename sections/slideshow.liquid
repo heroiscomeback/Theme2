@@ -1,0 +1,234 @@
+<section class="home-slideshow">
+  <div class="{% if section.settings.display_img_right %}row{% endif %}">
+	<div id="slideshow-{{section.id}}" class ="slideshow{% if section.settings.display_img_right %} col-xs-12 col-md-8{% endif %}">
+		<ul data-auto="{% if section.settings.autoplay %}true{% else %}false{% endif %}" data-speed="{{ section.settings.slideshow_speed }}">
+			{% for block in section.blocks %}
+				<li id="slide-{{ block.id }}" {{ block.shopify_attributes }}> 
+                  	<a href="{{ block.settings.link_button }}">
+					{% if block.settings.image_slide != blank %}
+                      <div class="lazy-images-contain">
+                        {%- assign img_url = block.settings.image_slide | img_url: '2000x' -%}
+                         <div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+                         <div class="lazy-images" style="background-image:url({{img_url}})">
+                           <noscript>
+                             <img src="{{img_url}}" alt="{{ block.settings.header_silde }}" title="{{ block.settings.header_silde }}" >
+                           </noscript>
+                         </div>
+                      </div>						
+					{% else %}
+						<span class="no-image">790 x 400px</span>                  
+					{% endif %}
+                     </a>
+                  <!--
+					<div class="content-slidehow{% if block.settings.alignment == 'center' %} slide-center{% elsif block.settings.alignment == 'right' %} slide-right{% endif %}">
+					
+						<h2 class="slide-header" style="font-size:{{block.settings.font_size_header}}; color:{{block.settings.color_header}}">
+							{% include 'multilang' with block.settings.header_silde %}
+						</h2>
+						
+						<div class="slide-des" style="font-size:{{block.settings.font_size_des}}; color:{{block.settings.color_des}}"> 
+							{% include 'multilang' with block.settings.image_des %}
+						</div>
+						
+						<a class="button-slide" href="{{ block.settings.link_button }}"
+                         style="font-size:{{block.settings.font_size_button}}; 
+                                color:{{block.settings.color_button}};
+                                background: {{block.settings.bg_button}};
+                               	border:1px solid {{block.settings.border_button}}
+                                ">
+							{% include 'multilang' with block.settings.button_slide %}
+						</a>
+					</div>-->
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+    {% if section.settings.display_img_right %}
+      <div class="column-right col-xs-12 col-md-4">
+        <a href="{{section.settings.link_img_right}}">
+          {% if section.settings.img_right != blank %}
+          <div class="lazy-images-contain">
+          	  {%- assign img_url = section.settings.img_right | img_url: '800x' -%}
+              <div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+              <div class="lazy-images" style="background-image:url({{img_url}})"></div>
+          </div>
+          {% else %}
+              <span class="no-img">380 x 400px</span>
+          {% endif %}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Slideshow",
+    "max_blocks": 10,
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "autoplay",
+            "label": "Auto-rotate slides",
+            "default": true
+        },
+	    {
+          "type": "select",
+          "id": "slideshow_speed",
+          "label": "Change slides every",
+
+          "options": [
+            { "value": "5000", "label": "5 seconds" },
+            { "value": "6000", "label": "6 seconds" },
+            { "value": "7000", "label": "7 seconds" },
+            { "value": "8000", "label": "8 seconds" },
+            { "value": "9000", "label": "9 seconds" },
+            { "value": "10000", "label": "10 seconds" }
+          ],
+          "default": "5000"
+      },
+	  {
+		"type" : "header",
+		"content" : "Image on the right side"
+	  },
+	  {
+		"type" : "checkbox",
+		"id" : "display_img_right",
+		"label" : "Enable",
+		"default" : true
+	  },
+	  {
+		"type" : "image_picker",
+		"id" : "img_right",
+		"label" : "Select Image"
+	  },
+	  {
+		"type" : "url",
+		"id" : "link_img_right",
+		"label" : "Link Image on the right side"
+      }
+     ],
+	"blocks" : [
+		{
+			"type" : "image",
+			"name" : "Image Slide",
+			
+			"settings":[
+				{
+					"type" : "image_picker",
+					"id" : "image_slide",
+					"label" : "Select Image",
+					"info" : "Recommended Image: Width x Height (790 x 400)PX"
+				},
+				{
+					"type": "select",
+					"id": "alignment",
+					"label": "Text alignment",
+					"default": "left",
+					"options": [
+						{
+							"value": "left",
+							"label": "Left"
+						},
+					    {
+							"value": "center",
+							"label": "Center"
+					    },
+					    {
+							"value": "right",
+							"label": "Right"
+					    }
+					]
+				},
+				{
+					"type" : "text",
+					"id" : "header_silde",
+					"label" : "Header",
+					"default" : "Soliquem Duscipitor"
+				},
+				{
+					"type" : "text",
+					"id" : "font_size_header",
+					"label" : "Header Font Size ",
+					"default" : "28px"
+				},
+				{
+					"type" : "color",
+					"id" : "color_header",
+					"label" : "Header Color",
+					"default" : "#000"
+				},
+				{
+					"type" : "richtext",
+					"id" : "image_des",
+					"label" : "Image description"
+				},
+				{
+					"type" : "text",
+					"id" : "font_size_des",
+					"label" : "Description Font Size",
+					"default" : "12px"
+				},
+				{
+					"type" : "color",
+					"id" : "color_des",
+					"label" : "Image description Color",
+					"default" : "#000"
+				},
+				{
+					"type" : "text",
+					"id" : "button_slide",
+					"label" : "Button Slideshow",
+					"default" : "Shop Now"
+				},
+				{
+					"type" : "url",
+					"id" : "link_button",
+					"label" : "Link Button"
+				},
+				{
+					"type" : "text",
+					"id" : "font_size_button",
+					"label" : "Font Size Button",
+					"default" : "14px"
+				},
+				{
+					"type" : "color",
+					"id" : "bg_button",
+					"label" : "Background Button",
+					"default" : "#f04723"
+				},
+				{
+					"type" : "color",
+					"id" : "border_button",
+					"label" : "Border Button",
+					"default" : "#f04723"
+				},
+				{
+					"type" : "color",
+					"id" : "color_button",
+					"label" : "Button Color",
+					"default" : "#fff"
+				}
+				
+				
+			]
+		}
+	],
+	"presets": [{
+      "name": "Slideshow",
+      "category": "Slideshow",
+      "blocks": [
+        {
+          "type": "image"
+        }
+      ]
+    }]
+  }
+{% endschema %}
+
+<style>
+
+.home-slideshow ul >li:not(:first-child){
+  	display:none
+}
+</style>

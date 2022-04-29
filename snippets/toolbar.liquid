@@ -1,0 +1,45 @@
+<div class="toolbar">
+  <div class="view-mode">
+<!--     <label {% if settings.enable_multilang %}data-translate="collections.toolbar.view_as"{% endif %}>{{ 'collections.toolbar.view_as' | t }}</label> -->
+    <a class="grid active" href="grid" title="{{ 'collections.general.grid_view' | t }}" {% if settings.enable_multilang %}data-translate="collections.general.grid_view" translate-item="title"{% endif %}>
+
+      <div class="icon-grid">
+        <div class="icon-bar"></div>
+        <div class="icon-bar"></div>
+        <div class="icon-bar"></div>
+      </div>
+      <span class="grid_icon" title="Grid view">Grid</span>
+<!--             <span class="grid_icon" {% if settings.enable_multilang %}data-translate="collections.general.grid_view"{% endif %}></span> -->
+    </a>  
+    <a class="list" href="list" title="{{ 'collections.general.list_view' | t }}" {% if settings.enable_multilang %}data-translate="collections.general.list_view" translate-item="title"{% endif %}>
+<!--       <span {% if settings.enable_multilang %}data-translate="collections.general.list_view"{% endif %}></span> -->
+      <div class="icon-list">
+          <div class="icon-bar"></div>
+          <div class="icon-bar"></div>
+          <div class="icon-bar"></div>
+      </div>
+      <span class="grid_icon" title="List view">List</span>
+    </a>  
+  </div>
+
+  <div class="filter-sortby btn-group">
+    <label for="sort-by"  {% if settings.enable_multilang %}data-translate="collections.sorting.title"{% endif %}>{{ 'collections.sorting.title' | t }}</label> 
+    <button class="btn btn-2 dropdown-toggle" data-toggle="dropdown">
+      <i class="icon-exchange"></i>
+     <span {% if settings.enable_multilang %}data-translate="collections.sorting.featured"{% endif %}>{{ 'collections.sorting.featured' | t }}</span>
+      <i class="icon-chevron-down"></i>
+    </button>
+
+    <ul class="dropdown-menu" role="menu">
+      <li class="active"><span data-href="manual" {% if settings.enable_multilang %}data-translate="collections.sorting.featured"{% endif %}>{{ 'collections.sorting.featured' | t }}</span></li>
+      <li><span data-href="price-ascending" {% if settings.enable_multilang %}data-translate="collections.sorting.price_ascending"{% endif %}>{{ 'collections.sorting.price_ascending' | t }}</span></li>
+      <li><span data-href="price-descending" {% if settings.enable_multilang %}data-translate="collections.sorting.price_descending"{% endif %}>{{ 'collections.sorting.price_descending' | t }}</span></li>
+      <li><span data-href="title-ascending" {% if settings.enable_multilang %}data-translate="collections.sorting.az"{% endif %}>{{ 'collections.sorting.az' | t }}</span></li>
+      <li><span data-href="title-descending" {% if settings.enable_multilang %}data-translate="collections.sorting.za"{% endif %}>{{ 'collections.sorting.za' | t }}</span></li>
+      <li><span data-href="created-ascending" {% if settings.enable_multilang %}data-translate="collections.sorting.date_ascending"{% endif %}>{{ 'collections.sorting.date_ascending' | t }}</span></li>
+      <li><span data-href="created-descending" {% if settings.enable_multilang %}data-translate="collections.sorting.date_descending"{% endif %}>{{ 'collections.sorting.date_descending' | t }}</span></li>
+      <li><span data-href="best-selling" {% if settings.enable_multilang %}data-translate="collections.sorting.best_selling"{% endif %}>{{ 'collections.sorting.best_selling' | t }}</span></li>
+    </ul>
+  </div>
+
+</div>

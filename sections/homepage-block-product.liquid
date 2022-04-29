@@ -1,0 +1,619 @@
+<section class="home-product-tabs" data-tabslick="#home_product_1_{{ section.id }}" data-id="{{ section.id }}" id="product-tabs-{{ section.id }}" >
+  		<div class="widget-content">
+          <div  class="tab-product-content" id="section_tab_{{section.id}}" style="{% if section.settings.display_clmn_left == false %} padding: 0px 20px;{% endif%}">
+            <div class="widget-title" style="{% if section.settings.display_clmn_left == false %} margin-left:-20px; margin-right:-20px;{% endif%}">
+              <h2>{{section.settings.title}}</h2>
+              <div class="dpl-tbs"><i class="fa fa-angle-down"></i></div>
+                <ul class="nav nav-tabs">
+                    <li>
+                        <a class="active tabs_first" id="home_tab_1_{{ section.id }}" data-toggle="tab" role="tab" aria-selected="true"  href="#home_product_1_{{ section.id }}" data-limit="{{section.settings.tabs_product_limit_all}}" data-row ="{{section.settings.tab_collection_results_per_row}}">
+                            {% include 'multilang' with section.settings.title_tabs_1 %}
+                        </a>
+                    </li>
+                    <li>
+                        <a data-href="/collections/{{ section.settings.collection_tab_2 }}" class="slick_click" id="home_tab_2_{{ section.id }}" data-toggle="tab" role="tab" aria-selected="false" data-tabs="#home_product_2_{{ section.id }}" href="#home_product_2_{{ section.id }}" data-limit="{{section.settings.tabs_product_limit_all}}" data-row ="{{section.settings.tab_collection_results_per_row}}">
+                            {% include 'multilang' with section.settings.title_tabs_2 %}
+                        </a>
+                    </li>
+                    <li> 
+                        <a data-href="/collections/{{ section.settings.collection_tab_3 }}" class="slick_click" id="home_tab_3_{{ section.id }}" data-toggle="tab" role="tab" aria-selected="false" data-tabs="#home_product_3_{{ section.id }}" href="#home_product_3_{{ section.id }}" data-limit="{{section.settings.tabs_product_limit_all}}" data-row ="{{section.settings.tab_collection_results_per_row}}">
+                            {% include 'multilang' with section.settings.title_tabs_3 %}
+                        </a>
+                    </li>
+                    <li>
+                        <a data-href="/collections/{{ section.settings.collection_tab_4 }}" class="slick_click" data-action="slick" id="home_tab_4_{{ section.id }}" data-toggle="tab" role="tab" aria-selected="false" data-tabs="#home_product_4_{{ section.id }}" href="#home_product_4_{{ section.id }}" data-limit="{{section.settings.tabs_product_limit_all}}" data-row ="{{section.settings.tab_collection_results_per_row}}">
+                            {% include 'multilang' with section.settings.title_tabs_4 %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+			<div class="tab-content tab-content-products {% if section.settings.display_clmn_left %} col-md-8 float-md-right {% else %}col-xs-12 {% endif %} " id="tabs_products_{{ section.id }}" data-id="{{section.id}}">
+				<div role="tabpanel" aria-labelledby="home_tab_1" id="home_product_1_{{ section.id }}" class="tab-pane show active">
+					<div class="products-grid row">
+						{%- assign collection = collections[section.settings.collection_tab_1] -%}
+						
+						{% for product in collection.products limit: section.settings.tabs_product_limit_all  %}
+							<div class="{% if settings.product_image_border %}grid-item-border{% endif %}{% if settings.product_image_crop %} crop_image{% else %} no_crop_image{% endif %} grid-item col-xs-6 col-sm-3 {% if product_grid == 3 %}col-md-3{% endif %} {% if columns %}col-lg-{{product_grid}}{% else %}col{% endif %}">
+								{% include 'product-grid-item' %}
+							</div>
+						{% else %}
+						{% for product in (1..section.settings.tabs_product_limit_all) %}
+						 <div class="grid-item col-xs-6 col-sm-3 {% if product_grid == 3 %}col-md-3{% endif %} {% if columns %}col-lg-{{product_grid}}{% else %}col{% endif %}">
+						   <div class="grid-view-item no-product">
+								<a href="#" class="grid-item-link">
+									<div class="grid-item-image">
+										{% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+										{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+									</div>
+								   <div class="product-title"><span>[Sample] Collette, florentine jungle dress</span></div>
+								</a>
+								<div class="price-box">
+									<span> $200.00 </span>
+								</div>
+						   </div>
+						 </div>
+						{% endfor %}
+					  {% endfor %}
+					</div>
+				 </div>
+				<div role="tabpanel" aria-labelledby="home_tab_2_{{ section.id }}" id="home_product_2_{{ section.id }}" class="tab-pane">
+					<div class="products-grid row">
+						<i class="icon_load"></i>
+					</div>
+				 </div>
+				<div role="tabpanel" aria-labelledby="home_tab_3_{{ section.id }}" id="home_product_3_{{ section.id }}" class="tab-pane">
+					<div class="products-grid row">
+						<i class="icon_load"></i>
+					</div>
+				 </div>
+				<div role="tabpanel" aria-labelledby="home_tab_4_{{ section.id }}" id="home_product_4_{{ section.id }}" class="tab-pane">
+					<div class="products-grid row">
+						<i class="icon_load"></i>
+					</div>
+				 </div>
+			</div>
+			{% if section.settings.display_clmn_left %}
+            <div class="col-xs-12 col-md-4 float-md-left">
+				<div class="slide-images">
+					<ul class="slide_clmnleft">
+						{% if section.settings.dp_img_sl_1 %}
+							<li>
+								<a href="{{section.settings.link_sl_img_1}}">
+									{% if section.settings.img_sl_1 != blank %}
+									<div class="lazy-images-contain">
+										{%- assign img_url = section.settings.img_sl_1 | img_url: '360x' -%}
+										<div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+										<div class="lazy-images" style="background-image:url({{img_url}})"></div>
+									</div>
+									{% else %}
+										<span class="no-image">360 x 300px</span>                  
+									{% endif %}
+								</a>
+							</li>
+						{% endif %}
+						{% if section.settings.dp_img_sl_2 %}
+							<li>
+								<a href="{{section.settings.link_sl_img_2}}">
+									{% if section.settings.img_sl_2 != blank %}
+									<div class="lazy-images-contain">
+										{%- assign img_url = section.settings.img_sl_2 | img_url: '360x' -%}
+										<div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+										<div class="lazy-images" style="background-image:url({{img_url}})"></div>
+									</div>
+									{% else %}
+										<span class="no-image">360 x 300px</span>                  
+									{% endif %}
+								</a>
+							</li>
+						{% endif %}
+						{% if section.settings.dp_img_sl_3 %}
+							<li>
+								<a href="{{section.settings.link_sl_img_3}}">
+									{% if section.settings.img_sl_3 != blank %}
+									<div class="lazy-images-contain">
+										{%- assign img_url = section.settings.img_sl_3 | img_url: '360x' -%}
+										<div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+										<div class="lazy-images" style="background-image:url({{img_url}})"></div>
+									</div>
+									{% else %}
+										<span class="no-image">360 x 300px</span>                  
+									{% endif %}
+								</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+				{% if section.settings.display_logo_brand %}
+				<div class="logo_brand">
+					<ul>
+						{% if section.settings.img_brnad_1 != blank %}
+						<li>
+							<a href="{{ section.settings.link_img_brand_1 }}">
+                              	{%- assign img_url_1 = section.settings.img_brnad_1 | img_url: '350x' -%}
+                              	<img src="{{img_url_1}}" alt="">
+                              	{% comment %}
+								<div class="lazy-images-contain">
+									{%- assign img_url = section.settings.img_brnad_1 | img_url: '350x' -%}
+									<div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+									<div class="lazy-images" style="background-image:url({{img_url}})"></div>
+								</div>
+                               {% endcomment %}
+							</a>
+						</li>
+						{% endif %}
+						
+						{% if section.settings.img_brnad_2 != blank %}
+						<li>
+							<a href="{{ section.settings.link_img_brand_2 }}">                           	
+                              	{%- assign img_url_2 = section.settings.img_brnad_2 | img_url: '350x' -%}
+                              	<img src="{{img_url_2}}" alt="">
+                              	{% comment %}
+								<div class="lazy-images-contain">
+									{%- assign img_url = section.settings.img_brnad_2 | img_url: '350x' -%}
+									<div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+									<div class="lazy-images" style="background-image:url({{img_url}})"></div>
+								</div>
+                              	{% endcomment %}
+							</a>
+						</li>
+						{% endif %}
+						
+						{% if section.settings.img_brnad_3 != blank %}
+						<li>
+							<a href="{{ section.settings.link_img_brand_3 }}">
+                              {%- assign img_url_3 = section.settings.img_brnad_3 | img_url: '350x' -%}
+                              <img src="{{img_url_3}}" alt="">
+                               {% comment %}
+								<div class="lazy-images-contain">
+									{%- assign img_url = section.settings.img_brnad_3 | img_url: '350x' -%}
+									<div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+									<div class="lazy-images" style="background-image:url({{img_url}})"></div>
+								</div>
+                              {% endcomment %}
+							</a>
+						</li>
+						{% endif %}
+                      
+						{% if section.settings.img_brnad_4 != blank %}
+                      <li>
+                        <a href="{{ section.settings.link_img_brand_4 }}">
+                          {%- assign img_url_4 = section.settings.img_brnad_4 | img_url: '350x' -%}
+                          <img src="{{img_url_4}}" alt="">
+                          {%comment%}
+                          <div class="lazy-images-contain">
+                            {%- assign img_url = section.settings.img_brnad_4 | img_url: '350x' -%}
+                            <div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+                            <div class="lazy-images" style="background-image:url({{img_url}})"></div>
+                          </div>
+                          {% endcomment %}
+                        </a>
+                      </li>
+						{% endif %}
+						
+                      {% if section.settings.img_brnad_5 != blank %}
+                      <li>
+                        <a href="{{ section.settings.link_img_brand_5 }}">
+                          {%- assign img_url_5 = section.settings.img_brnad_5 | img_url: '350x' -%}
+                          <img src="{{img_url_5}}" alt="">
+					      {% comment %}
+                          <div class="lazy-images-contain">
+                            {%- assign img_url = section.settings.img_brnad_5 | img_url: '350x' -%}
+                            <div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+                            <div class="lazy-images" style="background-image:url({{img_url}})"></div>
+                          </div>
+                           {% endcomment %}
+                        </a>
+                      </li>
+                      {% endif %}
+
+                      {% if section.settings.img_brnad_6 != blank %}
+                      <li>
+                        <a href="{{ section.settings.link_img_brand_6 }}">
+                          {%- assign img_url_6 = section.settings.img_brnad_6 | img_url: '350x' -%}
+                          <img src="{{img_url_6}}" alt="">
+                           {% comment %}
+                          <div class="lazy-images-contain">
+                            {%- assign img_url = section.settings.img_brnad_6 | img_url: '350x' -%}
+                            <div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+                            <div class="lazy-images" style="background-image:url({{img_url}})"></div>
+                          </div>
+                           {% endcomment %}
+                        </a>
+                      </li>
+                      {% endif %}						
+					</ul>
+				</div>
+				{% endif %}
+			</div>
+			{% endif %}
+            
+            {% if section.settings.display_block_mn %}
+            
+           
+            <div class="horizontal-block-menu">
+              	{% assign section_link = section.settings.block_menu_link %}
+                {% if linklists[section_link].links.size > 0 %}
+
+                  <ul class="block-nav-bar-filter">
+                    <li class="block-module-heading">{% include 'multilang' with section.settings.block_title_mn  %}</li>
+                    {% for link in linklists[section_link].links %}
+                    <li><a href="{{ link.url}}">{% include 'multilang' with link.title %}</a></li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+            </div>
+            
+            {% endif %}
+  		</div>
+ 	 </div>
+  	{% if section.settings.display_banner_bottom %}
+  	<div class="bottom-block-banner">
+      <ul class="row">
+        {% if section.settings.banner_bottom_1 != blank %}
+        <li class="col-xs-12 {% if section.settings.banner_bottom_2 == blank and  section.settings.banner_bottom_3 == blank %}col-md-12 bottom-one {% endif %}{% if section.settings.banner_bottom_2 == blank or  section.settings.banner_bottom_3 == blank %}col-md-6 bottom-two {% endif %}{% if section.settings.banner_bottom_2 != blank and  section.settings.banner_bottom_3 != blank %}col-md-4 {% endif %}">
+          <a href="{{ section.settings.link_banner_1 }}">
+            <div class="lazy-images-contain">
+              {%- assign img_url_bn = section.settings.banner_bottom_1 | img_url: '1200x' -%}
+              <div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+              <div class="lazy-images" style="background-image:url({{img_url_bn}})"></div>
+            </div>
+          </a>
+        </li>
+        {% endif %}
+        {% if section.settings.banner_bottom_2 != blank %}
+        <li class="col-xs-12 {% if section.settings.banner_bottom_1 == blank and  section.settings.banner_bottom_3 == blank %}col-md-12 bottom-one {% endif %}{% if section.settings.banner_bottom_1 == blank or  section.settings.banner_bottom_3 == blank %}col-md-6 bottom-two {% endif %}{% if section.settings.banner_bottom_1 != blank and  section.settings.banner_bottom_3 != blank %}col-md-4 {% endif %}">
+          <a href="{{ section.settings.link_banner_2 }}">
+            <div class="lazy-images-contain">
+              {%- assign img_url_bn = section.settings.banner_bottom_2 | img_url: '1200x' -%}
+              <div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+              <div class="lazy-images" style="background-image:url({{img_url_bn}})"></div>
+            </div>
+          </a>
+        </li>
+        {% endif %}
+        {% if section.settings.banner_bottom_3 != blank %}
+        <li class="col-xs-12 {% if section.settings.banner_bottom_1 == blank and  section.settings.banner_bottom_2 == blank %}col-md-12 bottom-one {% endif %}{% if section.settings.banner_bottom_1 == blank or  section.settings.banner_bottom_2 == blank %}col-md-6 bottom-two {% endif %}{% if section.settings.banner_bottom_2 != blank and  section.settings.banner_bottom_1 != blank %}col-md-4 {% endif %}">
+          <a href="{{ section.settings.link_banner_3 }}">
+            <div class="lazy-images-contain">
+              {%- assign img_url_bn = section.settings.banner_bottom_3 | img_url: '1200x' -%}
+              <div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+              <div class="lazy-images" style="background-image:url({{img_url_bn}})"></div>
+            </div>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  	{% endif %}
+</section>
+{% schema %}
+    {
+		"name": "Home Product Tab ",
+		"settings": [
+			{
+				"type" : "checkbox",
+				"id" : "show_product_tab",
+				"label" : "Enable",
+				"default" : true
+			},
+            {
+                "type" : "text",
+                "id" : "title",
+                "label" : "Block Title"
+            },
+            {
+                "type" : "header",
+                "content" : "Product Tab"
+            },
+            {
+                "type": "text",
+                "id" : "title_tabs_1",
+                "label" : "Tab 1 Title",
+                "default" : "New Products"
+            },
+            {
+                "type" : "collection",
+                "id" : "collection_tab_1",
+                "label" : "Select Collection 1"
+            },
+            {
+                "type" : "header",
+                "content" : "Product Tab 2"
+            },
+            {
+                "type" : "text",
+                "id" : "title_tabs_2",
+                "label" : "Tab 2 Title",
+                "default" : "Best Selling"
+            },
+            {
+                "type" : "collection",
+                "id" : "collection_tab_2",
+                "label" : "Select Collection 2"
+            },
+            {
+                "type" : "header",
+                "content" : "Product Tab 3"
+            },
+            {
+                "type" : "text",
+                "id" : "title_tabs_3",
+                "label" : "Tab 3 Title",
+                "default" : "Featured Products"
+            },
+            {
+                "type" : "collection",
+                "id" : "collection_tab_3",
+                "label" : "Select Collection 3"
+            },
+            {
+                "type" : "header",
+                "content" : "Product Tab 4"
+            },
+            {
+                "type": "text",
+                "id" : "title_tabs_4",
+                "label" : "Tab 4 Title",
+                "default" : "Most Popular Reviews"
+            },
+            {
+                "type" : "collection",
+                "id" : "collection_tab_4",
+                "label" : "Select Collection 4"
+            },
+            {
+                "type": "select",
+                "id": "tabs_product_limit_all",
+                "label": "Number of products to show",
+                "options": [
+                  {
+                      "value": "5",
+                      "label": "5"
+                  },
+                  {
+                      "value": "10",
+                      "label": "10"
+                  },
+                  {
+                      "value": "15",
+                      "label": "15"
+                  }
+                ],
+
+                "default": "10"	
+            },
+            {
+                "type": "select",
+                "id": "tab_collection_results_per_row",
+                "label": "Products per row",
+                "options": [
+                  {
+                      "value": "3",
+                      "label": "3"
+                  },
+                  {
+                      "value": "4",
+                      "label": "4"
+                  },
+                  {
+                      "value": "5",
+                      "label": "5"
+                  },
+                  {
+                      "value": "6",
+                      "label": "6"
+                  }
+                ],
+
+                "default": "4"
+            },
+            {
+                "type" : "header",
+                "content" : "Left Column"
+            },
+            {
+                "type" : "checkbox",
+                "id" : "display_clmn_left",
+                "label" : "Display Left Column",
+                "default" : true
+            },
+            {
+                "type" : "header",
+                "content" : "Slide Images"
+            },
+            {
+                "type" : "checkbox",
+                "id" : "dp_img_sl_1",
+                "label" : "Display Slide Image 1",
+                "default" : true
+            },
+            {
+                "type" : "image_picker",
+                "id" : "img_sl_1",
+                "label": "Slide Image 1"
+            },
+            {
+                "type" : "url",
+                "id" : "link_sl_img_1",
+                "label" : "Link Slide Image 1"
+            },
+            {
+                "type" : "checkbox",
+                "id" : "dp_img_sl_2",
+                "label" : "Display Slide Image 2",
+                "default" : true
+            },
+            {
+                "type" : "image_picker",
+                "id" : "img_sl_2",
+                "label": "Slide Image 2"
+            },
+            {
+                "type" : "url",
+                "id" : "link_sl_img_2",
+                "label" : "Link Slide Image 2"
+            },
+            {
+                "type" : "checkbox",
+                "id" : "dp_img_sl_3",
+                "label" : "Display Slide Image 3",
+                "default" : true
+            },
+            {
+                "type" : "image_picker",
+                "id" : "img_sl_3",
+                "label": "Slide Image 3"
+            },
+            {
+                "type" : "url",
+                "id" : "link_sl_img_3",
+                "label" : "Link Slide Image 3"
+            },
+            {
+                "type" : "header",
+                "content" : "Brands"
+            },
+            {
+                "type" : "checkbox",
+                "id" : "display_logo_brand",
+                "label" : "Display Logo Brands",
+                "default" : true
+            },
+            {
+                "type" : "image_picker",
+                "id" : "img_brnad_1",
+                "label" : "Logo Brands 1"
+            },
+            {
+                "type" : "url",
+                "id" : "link_img_brand_1",
+                "label" : "Link Logo Brand 1"
+            },
+            {
+                "type" : "image_picker",
+                "id" : "img_brnad_2",
+                "label" : "Logo Brands 2"
+            },
+            {
+                "type" : "url",
+                "id" : "link_img_brand_2",
+                "label" : "Link Logo Brand 2"
+            },
+            {
+                "type" : "image_picker",
+                "id" : "img_brnad_3",
+                "label" : "Logo Brands 3"
+            },
+            {
+                "type" : "url",
+                "id" : "link_img_brand_3",
+                "label" : "Link Logo Brand 3"
+            },
+            {
+                "type" : "image_picker",
+                "id" : "img_brnad_4",
+                "label" : "Logo Brands 4"
+            },
+            {
+                "type" : "url",
+                "id" : "link_img_brand_4",
+                "label" : "Link Logo Brand 4"
+            },
+            {
+                "type" : "image_picker",
+                "id" : "img_brnad_5",
+                "label" : "Logo Brands 5"
+            },
+            {
+                "type" : "url",
+                "id" : "link_img_brand_5",
+                "label" : "Link Logo Brand 5"
+            },
+            {
+                "type" : "image_picker",
+                "id" : "img_brnad_6",
+                "label" : "Logo Brands 6"
+            },
+            {
+                "type" : "url",
+                "id" : "link_img_brand_6",
+                "label" : "Link Logo Brand 6"
+            },
+            {
+                "type" : "header",
+                "content" : "Menu Bottom"
+            },
+            {
+                "type" : "checkbox",
+                "id" : "display_block_mn",
+                "label" : "Display Menu"
+            },
+            {
+                "type" : "text",
+                "id" : "block_title_mn",
+                "label" : "Title menu",
+                "default" : "Featured Categories:"
+            },
+            {
+                "type" : "link_list",
+                "id" : "block_menu_link",
+                "label" : "Select menu"
+            },
+            {
+                "type" : "header",
+                "content" : "Bottom Banner"
+            },
+            {
+                "type" : "checkbox",
+                "id" : "display_banner_bottom",
+                "label" : "Display Bottom Banner"
+            },
+            {
+                "type" : "image_picker",
+                "id": "banner_bottom_1",
+                "label" : "Bottom Banner 1"
+            },
+            {
+                "type" : "url",
+                "id" : "link_banner_1",
+                "label" : "Link Banner 1"
+            },
+            {
+                "type" : "image_picker",
+                "id": "banner_bottom_2",
+                "label" : "Bottom Banner 2"
+            },
+            {
+                "type" : "url",
+                "id" : "link_banner_2",
+                "label" : "Link Banner 2"
+            },
+            {
+                "type" : "image_picker",
+                "id": "banner_bottom_3",
+                "label" : "Bottom Banner 3"
+            },
+            {
+                "type" : "url",
+                "id" : "link_banner_3",
+                "label" : "Link Banner 3"
+            }
+		],
+        "presets": [
+              {
+                "name": "Home Product Tabs",
+                "category": "Collection"             
+              }
+         ]
+    }
+{% endschema %}
+
+
+<style>
+.home-product-tabs .products-grid > .grid-item:nth-child(n + 5) {
+    display:none;
+}
+.slide-images ul > li:not(:first-child){
+	display:none;
+}
+</style>

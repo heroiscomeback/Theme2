@@ -1,0 +1,215 @@
+{% comment %}
+	GEMPAGE BUILDER (https://apps.shopify.com/gempage)
+
+	You SHOULD NOT modify source code in this page because
+	It is automatically generated from GEMPAGE BUILDER
+	Try to edit page with the live editor.
+{% endcomment %}
+<!--GEM_HEADER-->
+<link data-instant-track rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" class="gf-style" />
+<link data-instant-track rel="stylesheet" type="text/css" href="https://d1um8515vdn9kb.cloudfront.net/files/vendor.css?refresh=1" class="gf-style" />
+<link data-instant-track rel="stylesheet" type="text/css" href="{{ 'gem-article-387728441426.css' | asset_url }}" class="gf_page_style">
+<!--GEM_HEADER_END-->
+{% assign number_of_comments = article.comments_count %}{% if comment and comment.created_at %}
+  {% assign number_of_comments = article.comments_count | plus: 1 %}
+{% endif %}<header class="page-header">
+  {% if current_tags %}
+    {% if settings.enable_multilang %}  
+    <h1 class="lang1">{{ blog.title | split: '|' | first | link_to: blog.url }} &raquo; {{ current_tags.first }}</h1>
+    <h1 class="lang2">{{ blog.title | split: '|' | last | link_to: blog.url }} &raquo; {{ current_tags.first }}</h1>
+    {% else %}
+    <h1>{{ blog.title | split: '|' | first | link_to: blog.url }} &raquo; {{ current_tags.first }}</h1>
+    {% endif %}
+  {% else %}
+    {% if settings.enable_multilang %}
+    <h1 class="lang1">{{ blog.title | split: '|' | first }}</h1>
+    <h1 class="lang2">{{ blog.title | split: '|' | last }}</h1>
+  	{% else %}
+  	<h1>{{ blog.title | split: '|' | first }}</h1>
+    {% endif %}
+  {% endif %}
+</header><div class="row">
+  {% if settings.display_sidebar_blog %}
+  <div class="page-sidebar col-xs-12 col-md-3">
+    <div class="content_sidebar">
+      {% if settings.display_sidebar_cat_page %}
+      <div class="sidebar-mb">
+        <a href="javascript:void(0)">Show sidebar <i class="fa fa-chevron-down"></i></a>
+      </div>
+      {% endif %}
+  	{% section 'sidebar-blog' %}
+    </div>
+  </div>
+  {% endif %}
+  <div class="{% if settings.display_sidebar_blog %}col-md-9{% else %} col-md-12{% endif%} blog-detail col-main" style="{% if settings.display_sidebar_blog == false %} max-width: 100%; flex: 0 0 100%{% endif %}">
+    <header class="page-header">
+      {% if settings.enable_multilang %}
+      <h1 class="lang1">{{ article.title | split: '|' | first }}</h1>
+      <h1 class="lang2">{{ article.title | split: '|' | last }}</h1>
+      {% else %}
+      <h1>{{ article.title | split: '|' | first }}</h1>
+      {% endif %}
+    </header>
+    
+      <p class="blog_author">
+        {% if blog.comments_enabled? %}
+        <a href="{{ article.url }}#comments" {% if settings.enable_multilang %}data-translate="blogs.comments.comments_with_count|count:{{article.comments_count}}"{%endif%}>
+          {{ 'blogs.comments.comments_with_count' | t: count: article.comments_count }}
+        </a><span class="separator">/</span>
+        {% endif %}        {% capture date %}<time datetime='{{ article.published_at | date: '%Y-%m-%d' }}'>{{ article.published_at | date: '%b %d, %Y' }}</time>{% endcapture %}
+        {% capture author %}{{ article.author }}{% endcapture %}
+        <span class="blog_author" {% if settings.enable_multilang %}data-translate="blogs.article.author_on_date_html|date:{{date}},author:{{author}}" translate-item="blog-date-author"{%endif%}>
+          {{ 'blogs.article.author_on_date_html' | t: date: date, author: author }}        
+        </span>
+      </p>
+        {% if settings.enable_multilang %}
+    <div class="rte lang1"><!--Gem_Page_Main_Editor--><div class="clearfix"></div><div class="gryffeditor">
+<div class="gryffeditor">
+<div data-label="Text Block"> <div class="elm text-edit"><p>Dear All Valued Customers,</p>
+<p>The National Day of China is coming, VXDAS will have one week holidays from Oct. 1st to Oct. 8th.</p>
+<p>Orders can be placed normally during holidays, you can enjoy 5% off automatically for hot sale items in VXDAS. All orders in holidays will start to arrange shipment on Oct. 9th. Any requests on your order declared value just leave notes in your order.</p>
+<div style="text-align: left;"><a href="https://bit.ly/3ijCVV8" target="_blank" title="VXDAS National Day Special Event" rel="noopener noreferrer"><img src="https://cdn.shopifycdn.net/s/files/1/0072/5424/5449/files/VXDAS_National_Day_Special_Event.jpg?v=1601348098" alt="VXDAS National Day Special Event" style="float: none;"></a></div>
+<p> </p>
+<p>If you have any other questions or need help, please leave messages via online service system or send email to <strong>webmaster@vxdas.com</strong>. We will reply at the first time when we back to work.</p>
+<p> </p>
+<h3><strong>The following service open for reservation.</strong></h3>
+<p><strong>Benz SCN Service Time:</strong> 10:00am - 8:00pm (GMT+8 Time Zone)</p>
+<p>Please contact our customer service representative for reservation.</p>
+<p> </p>
+<p>Order during Sep. 29th - 30th logistics will update after Oct. 3rd. If your order cannot be sent out in time, we will inform you the condition via email. The orders shipment will be arranged successively resumed on October 6th.<br><br>Any inconvenience because of the holiday, please kindly understand. Many thanks for all of your support always! <br><br>Sincerely,<br>VXDAS Team</p></div></div>
+</div><div id="divContentBk"></div>
+</div><div id="divContentBk"></div><!--End_Gem_Page_Main_Editor--></div>
+    <div class="rte lang2"><!--Gem_Page_Main_Editor--><div class="clearfix"></div><div class="gryffeditor">
+<div class="gryffeditor">
+<div data-label="Text Block"> <div class="elm text-edit"><p>Dear All Valued Customers,</p>
+<p>The National Day of China is coming, VXDAS will have one week holidays from Oct. 1st to Oct. 8th.</p>
+<p>Orders can be placed normally during holidays, you can enjoy 5% off automatically for hot sale items in VXDAS. All orders in holidays will start to arrange shipment on Oct. 9th. Any requests on your order declared value just leave notes in your order.</p>
+<div style="text-align: left;"><a href="https://bit.ly/3ijCVV8" target="_blank" title="VXDAS National Day Special Event" rel="noopener noreferrer"><img src="https://cdn.shopifycdn.net/s/files/1/0072/5424/5449/files/VXDAS_National_Day_Special_Event.jpg?v=1601348098" alt="VXDAS National Day Special Event" style="float: none;"></a></div>
+<p> </p>
+<p>If you have any other questions or need help, please leave messages via online service system or send email to <strong>webmaster@vxdas.com</strong>. We will reply at the first time when we back to work.</p>
+<p> </p>
+<h3><strong>The following service open for reservation.</strong></h3>
+<p><strong>Benz SCN Service Time:</strong> 10:00am - 8:00pm (GMT+8 Time Zone)</p>
+<p>Please contact our customer service representative for reservation.</p>
+<p> </p>
+<p>Order during Sep. 29th - 30th logistics will update after Oct. 3rd. If your order cannot be sent out in time, we will inform you the condition via email. The orders shipment will be arranged successively resumed on October 6th.<br><br>Any inconvenience because of the holiday, please kindly understand. Many thanks for all of your support always! <br><br>Sincerely,<br>VXDAS Team</p></div></div>
+</div><div id="divContentBk"></div>
+</div><div id="divContentBk"></div><!--End_Gem_Page_Main_Editor--></div>
+    {% else %}
+    <div class="rte"><!--Gem_Page_Main_Editor--><div class="clearfix"></div><div class="gryffeditor">
+<div class="gryffeditor">
+<div data-label="Text Block"> <div class="elm text-edit"><p>Dear All Valued Customers,</p>
+<p>The National Day of China is coming, VXDAS will have one week holidays from Oct. 1st to Oct. 8th.</p>
+<p>Orders can be placed normally during holidays, you can enjoy 5% off automatically for hot sale items in VXDAS. All orders in holidays will start to arrange shipment on Oct. 9th. Any requests on your order declared value just leave notes in your order.</p>
+<div style="text-align: left;"><a href="https://bit.ly/3ijCVV8" target="_blank" title="VXDAS National Day Special Event" rel="noopener noreferrer"><img src="https://cdn.shopifycdn.net/s/files/1/0072/5424/5449/files/VXDAS_National_Day_Special_Event.jpg?v=1601348098" alt="VXDAS National Day Special Event" style="float: none;"></a></div>
+<p> </p>
+<p>If you have any other questions or need help, please leave messages via online service system or send email to <strong>webmaster@vxdas.com</strong>. We will reply at the first time when we back to work.</p>
+<p> </p>
+<h3><strong>The following service open for reservation.</strong></h3>
+<p><strong>Benz SCN Service Time:</strong> 10:00am - 8:00pm (GMT+8 Time Zone)</p>
+<p>Please contact our customer service representative for reservation.</p>
+<p> </p>
+<p>Order during Sep. 29th - 30th logistics will update after Oct. 3rd. If your order cannot be sent out in time, we will inform you the condition via email. The orders shipment will be arranged successively resumed on October 6th.<br><br>Any inconvenience because of the holiday, please kindly understand. Many thanks for all of your support always! <br><br>Sincerely,<br>VXDAS Team</p></div></div>
+</div><div id="divContentBk"></div>
+</div><div id="divContentBk"></div><!--End_Gem_Page_Main_Editor--></div>
+    {% endif %}    
+    
+      {% include 'tags-article' %}
+    
+    <div class="addthis_inline_share_toolbox"></div>
+      <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-595b0ea2fb9c5869"></script>
+		
+	{% if settings.display_product_detail_share %}
+    {% include 'share' with article %}
+    {% endif %}        {% if blog.next_article or blog.previous_article %}    
+    <div class="action-btn">
+      {% if blog.previous_article %}
+      <span class="left">
+        <i class="fa fa-angle-left"></i> {{ 'blogs.article.older_post' | t | link_to: blog.previous_article }}
+      </span>
+      {% endif %}
+      {% if blog.next_article %}
+      <span class="right">
+        {{ 'blogs.article.newer_post' | t | link_to: blog.next_article }} <i class="fa fa-angle-right"></i>
+      </span>
+      {% endif %}
+    </div>
+    {% endif %}    {% if blog.comments_enabled? %}    
+	
+	<h2 class="title-comment">{{ 'blogs.comments.comments_with_count' | t: count: number_of_comments }}</h2>      {% paginate article.comments by 5 %}      
+      <div id="comments">        {% if comment and comment.created_at %}
+        <p class="note form-success">
+          {% if blog.moderated? %}
+          <span {% if settings.enable_multilang %}data-translate="blogs.comments.success_moderated"{%endif%}>{{ 'blogs.comments.success_moderated' | t }}</span>
+          {% else %}
+          <span {% if settings.enable_multilang %}data-translate="blogs.comments.success"{%endif%}>{{ 'blogs.comments.success' | t }}</span>
+          {% endif %}
+        </p>
+        {% endif %}        {% if number_of_comments > 0 %}
+        <ul>
+          
+          {% if comment and comment.created_at %}
+          <li id="{{ comment.id }}" class="comment first{% if article.comments_count == 0 %} last{% endif %}">
+            {% include 'comment' %}
+          </li>
+          {% endif %}          
+          {% for comment in article.comments %}
+          <li id="{{ comment.id }}" class="comment{% unless number_of_comments > article.comments_count %}{% if forloop.first %} first{% endif %}{% endunless %}{% if forloop.last %} last {% endif %}">
+            {% include 'comment' %}
+          </li>
+          {% endfor %}
+        </ul>
+        
+        {% if paginate.pages > 1 %}
+        <div class="text-center">
+          {% include 'pagination' %}
+        </div>
+        {% endif %}
+        {% endif %}        
+        
+        {% form article %}
+        
+        <h3 id="add-comment-title" {% if settings.enable_multilang %}data-translate="blogs.comments.title"{%endif%}>{{ 'blogs.comments.title' | t }}</h3>
+        {% include 'form-errors-custom' %}
+        <div class="comment-form">
+          <label for="comment-author" {% if settings.enable_multilang %}data-translate="blogs.comments.name"{%endif%}>{{ 'blogs.comments.name' | t }}</label>
+          <input {% if form.errors contains "author" %}class="error"{% endif %} type="text" name="comment[author]" id="comment-author" value="{{ form.author }}">
+          
+          <label for="comment-email" {% if settings.enable_multilang %}data-translate="blogs.comments.email"{%endif%}>{{ 'blogs.comments.email' | t }}</label>
+          <input {% if form.errors contains "email" %}class="error"{% endif %} type="email" name="comment[email]" id="comment-email" value="{{ form.email }}">
+        </div>
+        
+        <div class="message">
+          <label for="comment-body" {% if settings.enable_multilang %}data-translate="blogs.comments.message"{%endif%}>{{ 'blogs.comments.message' | t }}</label>
+          <textarea placeholder="Please leave your comment here" {% if form.errors contains "body" %}class="error"{% endif %} name="comment[body]" id="comment-body">{{ form.body }}</textarea>
+        </div>
+        
+        <p class="note" {% if settings.enable_multilang %}data-translate="blogs.comments.note"{%endif%}>{{ 'blogs.comments.note' | t }}</p>
+        <input type="submit" class="btn-secondary" value="{{ 'blogs.comments.post' | t }}">
+        {% if form.errors %}
+        <script>
+          window.location.hash = '#add-comment-title';
+        </script>
+        {% endif %}
+        
+        {% if form.posted_successfully? %}
+        <script>
+          window.location.hash = '#comments';
+        </script>
+        {% endif %}
+        {% endform %}
+    </div>
+    {% endpaginate %}
+    {% endif %}
+  </div>
+</div>
+<!--GEM_FOOTER-->
+{% capture GEM_FOOTER_SCRIPT %}
+<script data-instant-track type="text/javascript">
+	var pageLibs = [		'{{ 'gem-article-387728441426.js' | asset_url }}',	];
+</script>
+<script data-instant-track type="text/javascript">
+	var GEMVENDOR = GEMVENDOR || (function(){		var _js = {};		return {			init: function(Args) {				_js = Args;			},			getLibs: function() {				return _js;			}		};	}());	GEMVENDOR.init(pageLibs);</script>
+<script data-instant-track type="text/javascript" src="https://d1um8515vdn9kb.cloudfront.net/files/gempagev2.js?v=1.0" class="gf-script" defer></script>
+{% endcapture %}
+<!--GEM_FOOTER_END-->

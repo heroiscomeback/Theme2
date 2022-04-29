@@ -1,0 +1,423 @@
+<footer class="footer">
+  {% if section.settings.display_need_help %}
+  <div class="need_help">
+    <div class="container">
+  	{% include 'multilang' with section.settings.content_need_help %}
+    </div>
+  </div>
+  {% endif %}
+  {% if section.settings.display_footer_top %}
+  <div class="footer-top">
+    <div class="container">
+        <ul class="row">
+          <li class="col-sm-6 col-md-3">
+            <i class="fa fa-truck" aria-hidden="true"></i>
+            <div class="content-info">
+              <h3>{% include'multilang' with section.settings.ft_title_1 %}</h3>
+              <div class="content-text">
+                  {% include'multilang' with section.settings.content_footer_1 %}
+              </div>
+            </div>
+          </li>
+          <li class="col-sm-6 col-md-3">
+            <i class="fa fa-credit-card" aria-hidden="true"></i>
+            <div class="content-info">
+              <h3>{% include'multilang' with section.settings.ft_title_2 %}</h3>
+              <div class="content-text">
+                  {% include'multilang' with section.settings.content_footer_2 %}
+              </div>
+            </div>
+          </li>
+          <li class="col-sm-6 col-md-3">
+            <i class="fa fa-shield" aria-hidden="true"></i>
+            <div class="content-info">
+              <h3>{% include'multilang' with section.settings.ft_title_3 %}</h3>
+              <div class="content-text">
+                  {% include'multilang' with section.settings.content_footer_3 %}
+              </div>
+            </div>
+          </li>
+          <li class="col-sm-6 col-md-3">
+            <i class="fa fa-phone" aria-hidden="true"></i>
+            <div class="content-info">
+              <h3>{% include'multilang' with section.settings.ft_title_4 %}</h3>
+              <div class="content-text">
+                  {% include'multilang' with section.settings.content_footer_4 %}
+              </div>
+            </div>
+          </li>
+        </ul>
+    </div>
+  </div>
+  {% endif %}
+  <div class="footer-middle container">
+    <div class="row">
+      <div class="col-6 col-xs-6 col-md-2 column-footer">
+          {% if section.settings.footer_title_1 != blank %}
+           <h3>{% include 'multilang' with section.settings.footer_title_1 %}</h3>
+          {% endif %}
+          {%- assign footer_linklist = section.settings.footer_linklist -%}
+          {% if linklists[footer_linklist].links.size > 0 %}
+              <ul>
+                  {% for link in linklists[footer_linklist].links %}
+                       <li><a href="{{ link.url}}">{% include 'multilang' with link.title %}</a></li>
+                  {% endfor %}
+              </ul>
+          {% endif %}
+      </div>
+      <div class="col-6 col-xs-6 col-md-2 column-footer">
+          {% if section.settings.footer_title_2 != blank %}
+           <h3>{% include 'multilang' with section.settings.footer_title_2 %}</h3>
+          {% endif %}
+          {%- assign footer_linklist = section.settings.footer_linklist_2 -%}
+          {% if linklists[footer_linklist].links.size > 0 %}
+              <ul>
+                  {% for link in linklists[footer_linklist].links %}
+                       <li><a href="{{ link.url}}">{% include 'multilang' with link.title %}</a></li>
+                  {% endfor %}
+              </ul>
+          {% endif %}
+      </div>
+      <div class="col-6 col-xs-6 col-md-2 column-footer">
+          {% if section.settings.footer_title_3 != blank %}
+           <h3>{% include 'multilang' with section.settings.footer_title_3 %}</h3>
+          {% endif %}
+          {%- assign footer_linklist = section.settings.footer_linklist_3 -%}
+          {% if linklists[footer_linklist].links.size > 0 %}
+              <ul>
+                  {% for link in linklists[footer_linklist].links %}
+                       <li><a href="{{ link.url}}">{% include 'multilang' with link.title %}</a></li>
+                  {% endfor %}
+              </ul>
+          {% endif %}
+      </div>
+      <div class="col-6 col-xs-6 col-md-2 column-footer">
+          {% if section.settings.footer_title_4 != blank %}
+           <h3>{% include 'multilang' with section.settings.footer_title_4 %}</h3>
+          {% endif %}
+          {%- assign footer_linklist = section.settings.footer_linklist_4 -%}
+          {% if linklists[footer_linklist].links.size > 0 %}
+              <ul>
+                  {% for link in linklists[footer_linklist].links %}
+                       <li><a href="{{ link.url}}">{% include 'multilang' with link.title %}</a></li>
+                  {% endfor %}
+                {% if section.settings.view_all_brands != blank %}
+                <li class="mn_brands"><a href="{{section.settings.link_view_all}}"><i class="fa fa-chevron-right" aria-hidden="true"></i> {% include 'multilang' with section.settings.view_all_brands %}</a></li>
+                {% endif %}
+              </ul>
+          {% endif %}       
+      </div>
+      <div class="col-12 col-xs-6 col-md-4 column-footer">     
+          {% if section.settings.footer_newsletter_enable %}
+           <div class="footer-newsletter">
+             <h3 >{% include 'multilang' with section.settings.footer_newsletter_text %}</h3>
+             <div class="des">{% include 'multilang' with  section.settings.des_newsletter %}</div>
+             {% include 'homepage-block-newsletter' %}
+           </div>
+          {% endif %}
+          {% if section.settings.footer_social_enable %}
+            <div class="footer-social">
+              {% if section.settings.footer_social_title != blank %}
+              <h3>{% include 'multilang' with section.settings.footer_social_title %}</h3>
+               {% endif %}
+              {% include 'social-media' %}
+            </div>
+          {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if section.settings.display_ft_bt %}
+  <div class="footer-bottom">
+    <div class="container">
+    <div class="row">
+      <div class="footer_address col-xs-12 col-md-6">
+      	{% include'multilang' with section.settings.ft_address %}
+      </div>
+      <div class="footer_address clmn-left col-xs-12 col-md-6">
+        {% if section.settings.icon_payment != blank %}
+        {%- assign img_url = section.settings.icon_payment | img_url: '600x' -%}
+<!--       	<div class="lazy-images-contain">
+          <div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+          <div class="lazy-images" style="background-image:url({{img_url}})">
+          </div>
+        </div> -->
+        <img src="{{ img_url }}" alt="{{ block.settings.image.alt }}"/>
+        {% endif %}
+      </div>
+    </div>
+    </div>
+  </div>
+  {% endif %}
+</footer>
+{% include 'message-modal' %}
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+		{
+			"type" : "color",
+			"id" : "bg_ft",
+			"label" : "Background Footer",
+			"default" : "#fafafa"
+		},
+		{
+			"type" : "color",
+			"id" : "color_ft_text",
+			"label" : "Color Text",
+			"default" : "#141414"
+		},
+		{
+			"type" : "color",
+			"id" : "color_ft_header",
+			"label" : "Color Header",
+			"default" : "#000"
+		},
+		{
+			"type" : "color",
+			"id" : "ft_border",
+			"label" : "Footer Border",
+			"default" : "#e5e5e5"
+		},
+		{
+			"type" : "header",
+			"content" : "Need help"
+		},
+		{
+			"type" : "checkbox",
+			"id" : "display_need_help",
+			"label" : "Display Need Help",
+			"default" : true
+		},
+		{
+			"type" : "richtext",
+			"id" : "content_need_help",
+			"label" : "Content Need Help"
+		},
+		{
+			"type" : "header",
+			"content" : "Footer Top"
+		},
+		{
+			"type" : "checkbox",
+			"id" : "display_footer_top",
+			"label" : "Enable",
+			"default" : true
+		},
+		{
+			"type" : "text",
+			"id" : "ft_title_1",
+			"label" : "Footer Title 1",
+			"default" : "Worldwide Delivery"
+		},
+		{
+			"type" : "richtext",
+			"id" : "content_footer_1",
+			"label" : "Footer Content 1"
+		},
+		{
+			"type" : "text",
+			"id" : "ft_title_2",
+			"label" : "Footer Title 2",
+			"default" : "Secure Shopping"
+		},
+		{
+			"type" : "richtext",
+			"id" : "content_footer_2",
+			"label" : "Footer Content 2"
+		},
+		{
+			"type" : "text",
+			"id" : "ft_title_3",
+			"label" : "Footer Title 3",
+			"default" : "Shop with Confidence"
+		},
+		{
+			"type" : "richtext",
+			"id" : "content_footer_3",
+			"label" : "Footer Content 3"
+		},
+		{
+			"type" : "text",
+			"id" : "ft_title_4",
+			"label" : "Footer Title 4",
+			"default" : "24/7 Help Center"
+		},
+		{
+			"type" : "richtext",
+			"id" : "content_footer_4",
+			"label" : "Footer Content 4"
+		},
+		{
+			"type" : "header",
+			"content" : "Footer Column"
+		},
+      {
+        "type": "text",
+        "id": "footer_title_1",
+        "label": "Footer 1 Title"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist",
+        "label": "Footer Column 1",
+        "default": "footer"
+      },
+      {
+        "type": "text",
+        "id": "footer_title_2",
+        "label": "Footer 2 Title"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist_2",
+        "label": "Footer Column 2"
+      },
+      {
+        "type": "text",
+        "id": "footer_title_3",
+        "label": "Footer 3 Title"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist_3",
+        "label": "Footer Column 3"
+      },
+      {
+        "type": "text",
+        "id": "footer_title_4",
+        "label": "Footer 4 Title"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist_4",
+        "label": "Footer Column 4"
+      },
+	  {
+		"type" : "text",
+		"id" : "view_all_brands",
+		"label" : "View all brands",
+		"default" : "View All Brands"
+	  },
+	  {
+		"type" : "url",
+		"id" : "link_view_all",
+		"label" : "Link View all Brands"
+	  },
+	  {
+        "type": "header",
+        "content": "Newsletter"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_newsletter_enable",
+        "label": "Show newsletter signup?",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "footer_newsletter_text",
+        "label": "Footer Newsletter Text"
+      },
+	  {
+		"type" : "richtext",
+		"id" : "des_newsletter",
+		"label" : "Description newsletter"
+	  },
+	  {
+        "type": "header",
+        "content": "Social"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_social_enable",
+        "label": "Show social media links?",
+        "default": false
+      },
+	  {
+        "type": "text",
+        "id": "footer_social_title",
+        "label": "Footer Social Title"
+      },
+	  {
+		"type" : "header",
+		"content" : "Footer Bottom"
+	  },
+	  {
+		"type" : "checkbox",
+		"id" : "display_ft_bt",
+		"label" : "Display Footer Bottom",
+		"default" : true
+      },
+	  {
+		"type" : "color",
+		"id" : "bg_ft_bt",
+		"label" : "Background Footer Bottom",
+		"default" : "#272627"
+      },
+	  {
+		"type" : "color",
+		"id" : "color_ft_bt",
+		"label" : "Color",
+		"default" : "#ccccc6"
+      },
+	  {
+		"type" : "richtext",
+		"id" : "ft_address",
+		"label" : "Footer Address"
+	  },
+	  {
+		"type" : "image_picker",
+		"id" : "icon_payment",
+		"label" : "Icon Payment"
+	  }
+	]
+  }
+{% endschema %}
+
+<style>
+  .footer{
+    	background:{{section.settings.bg_ft }};
+    	color: {{section.settings.color_ft_text}};
+    	border-top: 1px solid {{section.settings.ft_border}};
+  }
+  .need_help, .footer-top{
+  		border-bottom: 1px solid {{section.settings.ft_border}};
+  }
+  .footer .footer-top ul li{
+  		border-right: 1px solid {{section.settings.ft_border}};
+  }
+  .footer .footer-top ul li a, .footer .footer-middle ul li a{
+    	color: {{section.settings.color_ft_text}};
+  }
+  .footer .footer-top ul li:last-child{
+  		border-right: 0px;
+  }
+  .footer-top .container{
+        border-left: 1px solid {{section.settings.ft_border}};
+    	border-right: 1px solid {{section.settings.ft_border}};
+  }
+  .footer-bottom{
+        background:{{section.settings.bg_ft_bt }};
+        color: {{section.settings.color_ft_bt}};
+  }
+  .footer-bottom a{
+    	color: {{section.settings.color_ft_bt}};
+  }
+  .footer h3{
+    	color: {{section.settings.color_ft_header}}
+  }
+  .footer .footer-top i{
+    	color: {{section.settings.color_ft_text}};
+    	opacity: 0.8;
+  }
+  .mn_brands a{
+    	color: {{section.settings.color_ft_text}};
+    	font-weight:700;
+  }
+  .mn_brands a i{
+  		color: {{section.settings.color_ft_text}};
+    	margin-right:5px;
+    	font-size:11px;
+    	opacity: 0.5;
+  }
+</style>

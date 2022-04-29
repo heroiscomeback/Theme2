@@ -1,0 +1,102 @@
+<div class="full-width-container wishlist-container">
+  {% paginate collections.all.products by 1000 %}
+  <div class="wishlist-hero">
+    <header class="page-header">
+    	<h1 class="wishlist-title">{% include 'multilang' with page.title %}</h1>
+    </header>
+  </div>
+  <div class="wishlist-grid flex">
+    <div class="wishlist-header">
+      <div class="row">
+        <div class="col-md-2"{% if settings.enable_multilang %}data-translate="wishlist.general.product_image"{% endif %}>{{ 'wishlist.general.product_image' | t }}</div>
+        <div class="col-md-3"{% if settings.enable_multilang %}data-translate="wishlist.general.product_name"{% endif %}>{{ 'wishlist.general.product_name' | t }}</div>
+        <div class="col-md-2 col"{% if settings.enable_multilang %}data-translate="wishlist.general.unit_price"{% endif %}>{{ 'wishlist.general.unit_price' | t }}</div>
+        <div class="col-md-2 col"{% if settings.enable_multilang %}data-translate="cart.general.remove"{% endif %}>{{ 'cart.general.remove' | t }}</div> 
+        <div class="col-md-3 col"{% if settings.enable_multilang %}data-translate="products.product.add_to_cart"{% endif %}>{{ 'products.product.add_to_cart' | t }}</div>
+      </div>
+    </div>
+    {% for product in collections.all.products %}
+    <div class="wishlist-product-content wishlist-tile-container product-item {% if forloop.first %}wishlist-first{% endif%}" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}"  id="product-{{ product.id }}">
+      <div class="row">
+        <div class="product-image col-md-2">
+          <a href="{{ product.url | within: collection }}" class="product-grid-image" title="{{ product.featured_image.alt | escape }}">
+            {% if product.images.size > 1 %}
+            <img src="{{ product.images[0].src | product_img_url: 'large' }}" alt="{{ product.images[0].alt | escape }}"
+                 class="lazyload"
+                 data-src="{{ product.images[0].src | product_img_url: '300x' }}"
+                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-aspectratio="{{ product.featured_image.aspect_ratio }}"
+                 data-sizes="auto"
+                 alt="{{ product.featured_image.alt | escape }}">	
+            {% endif %}
+          </a>
+        </div>
+        <div class="product-bottom col-md-3">
+          {% if settings.show_vendor %}
+          <div class="product-vendor">{{ product.vendor }}</div>
+          {% endif %}
+          <a class="product-title" href="{{ product.url | within: collection }}">
+            {% if settings.enable_multilang %}
+            <span class="lang1">{{ product.title | split: '|' | first }}</span>
+            <span class="lang2">{{ product.title | split: '|' | last }}</span>
+            {% else %}
+            {{ product.title | split: '|' | first }}
+            {% endif %}
+          </a>
+        </div>
+        <div class="price-box col-md-2">
+          {% if on_sale %}
+          <p class="sale">
+            <span class="old-price">{{ product.compare_at_price_min | money }}</span>
+            <span class="special-price">{% if product.price_varies %}{% include 'varies_from' %}{% endif %}{{ product.price_min | money }}</span>
+          </p>
+          {% else %}
+          <div class="regular-product">
+            <span>{% if product.price_varies %}{% include 'varies_from' %}{% endif %}{{ product.price_min | money }}</span>
+          </div>
+          {% endif %}
+        </div>
+        <a class="action--wishlist wishlist-btn col-md-2" href="#" data-product-handle="{{ product.handle }}">
+          {% include 'icon-close' %}
+        </a>
+
+        <div class="action col-md-3" id="product-actions-{{ product.id }}">
+          {% assign variantCount = product.variants | size %}
+          <form action="/cart/add" method="post" class="variants" enctype="multipart/form-data" style="padding:0px;">    
+            {% if sold_out %}
+            <input class="btn add-to-cart-btn" type="submit" value="{{ 'products.product.unavailable' | t }}" disabled="disabled" {% if settings.enable_multilang %}data-translate="products.product.unavailable"{% endif %}/>
+            {% else %}
+            {% if variantCount > 1 %}
+            <input class="btn" type="button" onclick="window.location.href='{{product.url}}'" value="{{ 'products.product.select_options' | t }}" {% if settings.enable_multilang %}data-translate="products.product.select_options"{% endif %}/>
+            {% else %}
+            <input type="hidden" name="id" value="{{ product.variants[0].id }}" />      
+            <input class="btn add-to-cart-btn" type="submit" value="{{ 'products.product.add_to_cart' | t }}" {% if settings.enable_multilang %}data-translate="products.product.add_to_cart"{% endif %}/>
+            {% endif %}
+            {% endif %}
+          </form>      
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+    <div class="wishlist-grid--empty-list flex">
+      <div class="empty-list--info">
+        <h6 class="empty-list--text black">Looks like you haven't started a wishlist yet...</h6>
+        <a class="btn empty-list--btn" href="/collections/all">Start Shopping</a>
+      </div>
+    </div>
+  </div>
+  <!-- Loader -->
+  <div class="wishlist-loader">
+    <img class="wishlist-loader--image" src="{{ 'ring.gif' | asset_url }}" alt="Wishlist loading">
+  </div>
+  <a class="share" href="mailto:?subject={{ subject }}&amp;body={{ body | remove: ' ' | replace: '"',"'" | strip_newlines}}" {% if settings.enable_multilang %}data-translate="wishlist.general.share_wishlist"{% endif %}>{{ 'wishlist.general.share_wishlist' | t }}</a>
+{% endpaginate %}
+</div>
+
+<script>
+  $('.wishlist-grid .wishlist-btn').click(function(e) {
+    var hide_wishlist = $(this).parents('.wishlist-tile-container');
+    hide_wishlist.fadeOut(1000);
+  });
+</script>

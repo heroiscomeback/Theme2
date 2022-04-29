@@ -1,0 +1,53 @@
+<div class="wrapper-top-cart">
+  <p class="top-cart">             
+    <a href="javascript:void(0)" class="cartToggle">
+<!--       <span class="first" {% if settings.enable_multilang %}data-translate="cart.general.shopping_cart"{% endif %}>{{ 'cart.general.shopping_cart' | t }}</span> -->
+      <i class="fa fa-shopping-cart"></i>
+      <span class="cartCount">{{ cart.item_count }}</span>
+    </a>
+    
+  </p>
+  <div class="dropdown-cart" style="display:none"> 
+    <div class="no-items">
+      <p>{{ 'cart.general.empty' | t }}</p>
+      <p class="text-continue"><a class="btn" href="javascript:void(0)" {% if settings.enable_multilang %}data-translate="cart.ajax_cart.continue_shopping"{% endif %}>{{ 'cart.ajax_cart.continue_shopping' | t }}</a></p>
+    </div>
+    <div class="has-items">
+      <ol class="mini-products-list">  
+        {% for item in cart.items %}
+        <li class="item" id="cart-item-{{item.id}}">
+          <a href="{{item.url}}" class="product-image">
+            <img src="{{ item.image | product_img_url: 'small' }}" alt="{{item.title}}">
+          </a>
+          <div class="product-details">
+            <a href="javascript:void(0)" title="{{ 'cart.general.remove' | t }}" class="btn-remove">{% include 'icon-close' %}</a>
+            <p class="product-name">
+              <a href="{{item.url}}">
+                {% include 'multilang' with item.product.title %}
+              </a>
+            </p>
+            <div class="option">
+              {% if item.product.variants.size != 0 %}
+              {% unless item.variant.title contains 'Default' %}
+              <small>{{ item.variant.title }}</small>
+              {% endunless %}
+              {% endif %}
+            </div>
+            <div class="cart-collateral"><span class="price">{{item.quantity}} x {{item.price | money}}</span></div>
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+      <div class="summary">                
+        <p class="total">
+          <span class="label"><span {% if settings.enable_multilang %}data-translate="cart.label.total"{% endif %}>{{ 'cart.label.total' | t }}</span>:</span>
+          <span class="price">{{cart.total_price | money}}</span> 
+        </p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="/cart" {% if settings.enable_multilang %}data-translate="cart.general.view_cart"{% endif %}>{{ 'cart.general.view_cart' | t }}</a>
+        <button class="btn" onclick="window.location='/checkout'" {% if settings.enable_multilang %}data-translate="cart.general.checkout"{% endif %}>{{ 'cart.general.checkout' | t }}</button>  	
+      </div>    
+    </div>
+  </div>
+</div>

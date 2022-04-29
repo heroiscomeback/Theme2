@@ -1,0 +1,28 @@
+<script>
+  if(typeof(Spurit) === 'undefined'){
+    var Spurit = {};
+  }
+  if(!Spurit.Oneclickcheckout2){
+    Spurit.Oneclickcheckout2 = {};
+  }
+  if(!Spurit.Oneclickcheckout2.snippet){
+    Spurit.Oneclickcheckout2.snippet = {};
+  }
+  Spurit.Oneclickcheckout2.snippet.shopHash = 'ca0e09eeea77a8f10d3e6aba76928469';
+  Spurit.Oneclickcheckout2.snippet.cacheTimestamp = 1579519870;
+
+  Spurit.Oneclickcheckout2.product = {{ product | json }}; //todo remove after 2.2 version release, if unused
+  Spurit.Oneclickcheckout2.collections = {{ product.collections | json }};
+
+  if(typeof(Spurit.globalSnippet) === 'undefined'){
+    Spurit.globalSnippet = {
+      shop_currency: '{{ shop.currency }}',
+      money_format: '{{ shop.money_format }}',
+      cart: {{ cart | json }},
+      customer_id: '{{ customer.id }}'
+    };
+  }
+</script>
+
+    <script src="https://cdn-spurit.com/shopify-apps/oneclickcheckout2/common.js"></script>
+    <link href="https://cdn-spurit.com/shopify-apps/oneclickcheckout2/common.css" rel="stylesheet" type="text/css" media="all">

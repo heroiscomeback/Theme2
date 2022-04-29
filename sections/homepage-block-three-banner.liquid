@@ -1,0 +1,74 @@
+{% if section.settings.display_three_block_banner %}
+<section class="banner-home-top">
+    <ul class="row">
+      {% for block in section.blocks %}
+      <li class="col-xs-6 col-sm-4">
+          <a href="{{ block.settings.link }}">
+              {% if block.settings.image != blank %}
+              <div class="lazy-images-contain">
+                {%- assign img_url = block.settings.image | img_url: '500x' -%}
+                 <div class="lazy-images-placeholder"><i class="fa fa-spinner"></i></div>
+                 <div class="lazy-images" style="background-image:url({{img_url}})">
+                   <noscript><img src="{{ img_url }}" alt="{{ block.settings.image.alt }}"></noscript>
+                 </div>
+              </div>
+               {% else %} 	
+               <span class="no-img">380 x 240px</span>
+              {% endif %}     
+          </a>
+      </li>
+      {% endfor %}
+    </ul>
+</section>
+{% endif %}
+{% schema %}
+  {
+    "name": "Three Banner Block",
+    "max_blocks": 12,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "display_three_block_banner",
+        "label": "Enable",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+			"info": "Width: 380px recommended"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link",
+            "info": "Optional"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Block Three Banner",
+        "category": "Advanced layout",
+        "blocks": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

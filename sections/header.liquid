@@ -1,0 +1,132 @@
+<header class="site-header" role="banner">
+	<div class="top-banner">
+		{% if section.settings.show_banner_top %}
+			{% if section.settings.img_banner_top != blank %}
+				<a href="{{section.settings.link_banner}}"><img src="{{section.settings.img_banner_top | img_url: 'master' }}" alt="" ></a>
+				<a href="javascript:void(0)" class="close">close</a>
+			{% else %}
+				<span class="no-image">1860 x 70px</span>
+			{% endif %}
+			<script>
+				if (jQuery.cookie('headerTop') == 'closed') {
+					jQuery('.top-banner').remove();
+				}
+				jQuery('.top-banner a.close').bind('click',function(){
+					jQuery('.top-banner').remove();
+					jQuery.cookie('headerTop', 'closed', {expires:1, path:'/'});
+			  });  
+		    </script>
+		{% endif %}
+	</div>
+	<div class="header-top">
+        <div class="container-fluid">
+            <div class="row">
+              
+                <div class="col-xs-12 col-md-4 free_shipping">
+                    {% include 'multilang' with section.settings.header_top_text  %}
+                </div>
+              
+                <div class="col-xs-12 col-md-8 column-right">
+                    {% include 'customer_links' %}
+                </div>
+              
+            </div>
+        </div>
+	</div>
+</header>
+{% if settings.enable_multilang %}
+<script>
+  translator.doTranslate(".site-header");
+  window.dropdowncart_type = "{{ section.settings.dropdowncart_type }}";
+</script>
+{% endif %}
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+		{
+			"type" : "header",
+			"content" : "Top Banner"
+		},
+		{
+			"type" : "checkbox",
+			"id" : "show_banner_top",
+			"label" : "Display Top Banner",
+			"default" : true
+		},
+		{
+			"type" : "image_picker",
+			"id" : "img_banner_top",
+			"label" : "Top banner image",
+			"info" : "Recommended: (Width x Height) 1860x70px"
+		},
+		{
+			"type" : "url",
+			"id" : "link_banner",
+			"label" : "Link Top Banner"
+		},
+		{
+			"type" : "header",
+			"content" : "Header Top"
+		},
+		{
+			"type": "richtext",
+			"id": "header_top_text",
+			"label": "Free Shoppping"
+		},
+		{
+			"type" : "richtext",
+			"id" : "hd_text_1",
+			"label" : "Header Text 1"
+		},
+		{
+			"type" : "richtext",
+			"id" : "hd_text_2",
+			"label" : "Header Text 2"
+		},
+		{
+			"type" : "richtext",
+			"id" : "hd_text_3",
+			"label" : "Header Text 3"
+		},
+		{
+			"type" : "color",
+			"id" : "bg_top",
+			"label" : "Background Header Top",
+			"default" : "#1e5bea"
+		},
+		{
+			"type" : "color",
+			"id" : "color_top",
+			"label" : "Color Header Top",
+			"default" : "#fff"
+		},
+		{
+			"type": "radio",
+			"id": "dropdowncart_type",
+			"label": "When to show dropdown cart",
+			"options": [
+			  {
+				"value": "click",
+				"label": "Click on the cart"
+			  },
+			  {
+				"value": "hover",
+				"label": "Hover on the cart"
+			  }
+			]
+		}
+    ]
+  }
+{% endschema %}
+
+<style>
+
+.header-top{
+	background:{{section.settings.bg_top }};
+
+}
+.header-top a, .header-top{
+  	color : {{ section.settings.color_top }}
+}
+</style>
